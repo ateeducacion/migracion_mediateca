@@ -58,7 +58,7 @@
                         <content:encoded>
                             <xsl:value-of select="content:encoded"/>
                         </content:encoded>
-                        
+
                         <wp:attachment_url>
                                     <xsl:value-of select="wp:attachment_url"/>
                         </wp:attachment_url>
@@ -121,7 +121,7 @@
                         </xsl:for-each>
                     </wp:item>
                 </resource>
-                <xsl:choose>
+               <!-- <xsl:choose>
                     <xsl:when test="$Media != '0'">
                         <resource wrapper="1">
                             <wp:item xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
@@ -152,7 +152,7 @@
                                 <excerpt:encoded>
                                     <xsl:value-of select="excerpt:encoded"/>
                                 </excerpt:encoded>
-                                <!-- Post Meta copyright-->
+
                                 <xsl:for-each select="wp:postmeta[wp:meta_key = 'meta_copyright']">
                                     <wp:postmeta>
                                         <wp:meta_key>
@@ -167,8 +167,9 @@
                         </resource>
                     </xsl:when>
                 </xsl:choose>
-                
+                -->
             </xsl:when>
+
             <xsl:otherwise>
                 <resource wrapper="1">
                     <wp:item xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
