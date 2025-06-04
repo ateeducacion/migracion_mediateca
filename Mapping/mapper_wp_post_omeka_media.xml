@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Mapper para importar ítems desde un RSS exportado de WordPress a Omeka S.
+
+    Convierte entradas (vídeos, ponencias, metadatos) en recursos de tipo o:Media.
+   asociados a su Item por el campo post_id o post_parent(trasformado desde xsl)
+    Licencia: Creative Commons CC-BY
+-->
+
+<mapping>
+
+    <info>
+        <label>prueba to Omeka</label>
+        <from>unimarc</from>
+        <to>resources</to>
+    </info>
+
+    <map>
+        <to field="resource_name"/>
+        <mod raw="o:Media"/>
+    </map>
+
+    <!-- Título del ítem -->
+    <map>
+        <from xpath="/wp:item/title"/>
+        <to field="dcterms:title"/>
+    </map>
+
+    <!-- identificador del ítem en wordpress -->
+    <map>
+        <from xpath="/wp:item/wp:post_id"/>
+        <to field="o:item"
+             datatype="literal"/>
+    </map>
+
+
+    <!-- Autor original -->
+    <map>
+        <from xpath="/wp:item/dc:creator"/>
+        <to field="dcterms:creator"/>
+    </map>
+
+
+    <!-- Descripción-->
+    <map>
+        <from xpath="/wp:item/description"/>
+        <to field="dcterms:description"/>
+    </map>
+
+    <!-- Slug: post_name en wp -->
+    <map>
+        <from xpath="/wp:item/wp:post_name"/>
+        <to field="dcterms:replaces"/>
+    </map>
+
+    <!-- Fecha de publicación -->
+    <map>
+        <from xpath="/wp:item/wp:post_date"/>
+        <to field="dcterms:date"
+             datatype="literal"/>
+    </map>
+
+    <!-- Contenido HTML -->       
+    <map>
+        <from xpath="/wp:item/content:encoded"/>
+        <to field="html"/>
+    </map>
+
+
+    <!-- URL del vídeo adjunto  -->
+    <map>
+        <from xpath="/wp:item/wp:attachment_url"/>
+        <to field="url"
+             datatype="uri"/>
+    </map>
+ 
+    <!-- Autor real (metadato personalizado) -->
+    <map>
+        <from xpath="/wp:item/wp:postmeta[wp:meta_key='meta_author']/wp:meta_value"/>
+        <to field="dcterms:contributor"
+             datatype="literal"/>
+    </map>
+
+    <!-- Derechos de autor -->
+    <map>
+        <from xpath="/wp:item/wp:postmeta[wp:meta_key='meta_copyright']/wp:meta_value"/>
+        <to field="dcterms:rights"
+             datatype="literal"/>
+    </map>
+
+</mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Mapper para importar ítems desde un RSS exportado de WordPress a Omeka S.
+
+    Crea las categorias WP como o:Item_set
+    Licencia: Creative Commons CC-BY
+-->
+
+<mapping>
+
+    <info>
+        <label>Item Set Import from WP</label>
+        <from>unimarc</from>
+        <to>resources</to>
+    </info>
+
+    <map>
+        <to field="resource_name"/>
+        <mod raw="o:Item_set"/>
+    </map>
+
+    <!-- Título del ítem -->
+    <map>
+        <from xpath="/wp:term/term_name"/>
+        <to field="dcterms:title"
+             datatype="literal"/>
+    </map>
+
+    <!-- Identificador wp -->
+    <map>
+        <from xpath="/wp:term/term_id"/>
+        <to field="dcterms:identifier"
+             datatype="literal"/>
+    </map>
+
+    <!-- Slug wp -->
+    <map>
+        <from xpath="/wp:term/term_slug"/>
+        <to field="dcterms:identifier"
+             datatype="literal"/>
+    </map>
+
+    <!-- parent wp -->
+    <map>
+        <from xpath="/wp:term/term_parent"/>
+        <to field="dcterms:isPartOf"
+             datatype="literal"/>
+    </map>
+
+
+</mapping>
