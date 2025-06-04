@@ -55,6 +55,10 @@
                             <xsl:value-of select="description"/>
                         </description>
 
+                        <content:encoded>
+                            <xsl:value-of select="content:encoded"/>
+                        </content:encoded>
+                        
                         <wp:attachment_url>
                                     <xsl:value-of select="wp:attachment_url"/>
                         </wp:attachment_url>
