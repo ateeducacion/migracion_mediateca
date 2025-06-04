@@ -60,12 +60,12 @@
              datatype="literal"/>
     </map>
 
-    <!-- Contenido HTML -->       
+    <!-- Contenido HTML se omite y se añade como metadato no como media      
     <map>
         <from xpath="/wp:item/content:encoded"/>
         <to field="html"/>
     </map>
-
+    -->
 
     <!-- URL del vídeo adjunto  -->
     <map>

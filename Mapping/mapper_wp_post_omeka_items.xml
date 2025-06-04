@@ -38,12 +38,12 @@
         <to field="dcterms:creator"/>
     </map>
 
-    <!-- contenido HTML 
+    <!-- contenido HTML -->
     <map>
         <from xpath="/wp:item/content:encoded"/>
-        <to field="html"/>
+        <to field="dcterms:abstract"/>
     </map>
--->
+
     <!-- Descripción-->
     <map>
         <from xpath="/wp:item/description"/>
