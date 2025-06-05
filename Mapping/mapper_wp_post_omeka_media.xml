@@ -10,8 +10,8 @@
 <mapping>
 
     <info>
-        <label>prueba to Omeka</label>
-        <from>unimarc</from>
+        <label>WP to Omeka Media</label>
+        <from>Wordpress</from>
         <to>resources</to>
     </info>
 

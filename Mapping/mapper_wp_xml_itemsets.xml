@@ -10,7 +10,7 @@
 
     <info>
         <label>Item Set Import from WP</label>
-        <from>unimarc</from>
+        <from>Wordpress</from>
         <to>resources</to>
     </info>
 

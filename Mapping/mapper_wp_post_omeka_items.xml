@@ -9,8 +9,8 @@
 <mapping>
 
     <info>
-        <label>prueba to Omeka</label>
-        <from>unimarc</from>
+        <label>WP to Omeka Items</label>
+        <from>Wordpress</from>
         <to>resources</to>
     </info>
 
@@ -40,9 +40,11 @@
 
     <!-- contenido HTML -->
     <map>
-        <from xpath="/wp:item/content:encoded"/>
+        <from xpath="/wp:item/wp:postmeta[wp:meta_key='plain_text_content']/wp:meta_value"/>
         <to field="dcterms:abstract"/>
     </map>
+
+    
 
     <!-- Descripción-->
     <map>
