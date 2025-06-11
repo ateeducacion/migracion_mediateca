@@ -102,7 +102,7 @@
 
     <!-- wp:Item Set : Collection -->
     <map>
-        <from xpath="/wp:item/category[@domain='media-category']"/>
+        <from xpath="/wp:item/category[@domain='media-category']/@nicename"/>
         <to field="o:item_set"
              datatype="literal"/>
     </map>
