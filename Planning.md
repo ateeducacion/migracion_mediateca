@@ -134,11 +134,53 @@
 3.  **Pruebas con Lote Mediano**
  
 4.  **Simulacro de lotes mayores de datos:**
-    Se ha realizado la prueba de migrar un año entero (5200 items)
+    Se ha realizado la prueba de migrar un año entero (~1800 items)
+
+5. **Resolver particularidades de la mediateca**
+    *   Créditos en algunos items (logos por ser contenido financiado por alguna entidad (FEDER, ...)): Se valora añadirlos mediante CSS 
+    *   Añadir extensiones a la configuración de OMEKA-S:  
+        - En tipo MIME: application/postscript,image/x-eps,text/vtt,application/x-zip-compressed
+        - En extensiones permitidas: eps,vtt
+    *   Procesado de medios EPS: ejecutar en servidor:
+
+    ```bash 
+    sed -i 's|<policy domain="coder" rights="none" pattern="EPS" />|<!-- <policy domain="coder" rights="none" pattern="EPS" /> -->|' /etc/ImageMagick-6/policy.xml 
+    ``` 
+
 
 ### Fase 3: Migración total de la mediateca de ATE en Servidor de Desarrollo
 
+1. Pasos previos a la carga de archivos XML
+    *   Añadir extensiones a la configuración de OMEKA-S:  
+        - En tipo MIME: application/postscript,image/x-eps,text/vtt,application/x-zip-compressed
+        - En extensiones permitidas: eps,vtt
+    *   Importación de plantillas de recursos
+        - Plantilla autores
+        - Categoria
+    *   Realizar la migración de los autores <wp:authors>: Obtenerla del XML exportado de WP->pasarla a csv:
+        - Bulk import => Importación de items csv
+            - 1ra pasada: creación de recursos
+            - 2da pasada: append data to resources
+    *   Configuración Módulo Bulk Import
+        - 0. WP XML-ItemSets
+            - Mapper: mapper_wp_xml_itemsets.xml
+            - XSL Proc: wp_omeka_itemset.xsl
+        - 1. WP XML- Items
+            - Mapper: mapper_wp_post_omeka_items
+            - XSL Proc: wp_omeka_items_preprocesor
+            - Params: postType = attachment, postParent = 0, Media = 0
+        - 2. WP XML - Media
+            - Mapper: mapper_wp_post_omeka_media
+            - XSL Proc: wp_omeka_items_preprocesor
+            - Params: postType = attachment, postParent = 0, Media = 1
+
+    *   Importación de colecciones
+        - 0. WP XML-ItemSets
+        - 1. WP XML-Items
+        - 2. WP XML-Media
+
 - Realizar documentación paso a paso desde una instalación de Omeka básica del proceso de migración para facilitar trabajo a CAUCE
+
 - Realizar el desarrollo del site donde se visualizarán los recursos digitales para facilitar su diseño posteriormente en producción.
 
     

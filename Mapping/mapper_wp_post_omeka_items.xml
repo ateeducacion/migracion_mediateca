@@ -35,7 +35,8 @@
     <!-- Autor original -->
     <map>
         <from xpath="/wp:item/dc:creator"/>
-        <to field="dcterms:creator"/>
+        <to field="dcterms:creator"
+            datatype="resource:item"/>
     </map>
 
     <!-- contenido HTML -->
@@ -45,7 +46,6 @@
     </map>
 
     
-
     <!-- Descripción-->
     <map>
         <from xpath="/wp:item/description"/>
