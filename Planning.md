@@ -59,6 +59,9 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
 *   **6. Documentación de Referencia:**
     *   Este mismo documento (`Planning.md`).
     *   Cualquier otra documentación técnica entregada por el equipo de desarrollo.
+*   **7. Aplicaciones y librerias en servidor**
+    *   ffmpeg: para procesado de video
+    *   
 
 ## Terminología Clave
 
@@ -128,7 +131,6 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
         - **Sitios previstos**
             - **Mediateca ATE** (https://www3.gobiernodecanarias.org/medusa/mediateca/ecoescuela/?media-tag=ate)
             - **Recursos Educativos** (https://www3.gobiernodecanarias.org/medusa/ecoescuela/recursosdigitales/)
-            - ...
             - **Canales de mediateca de centros educativos**
 
 2.  **Configuración del Entorno Omeka S:**
@@ -221,9 +223,9 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
             *   `postParent`: El XSL debe usar `<wp:post_parent>` del XML para enlazar con `dcterms:identifier` del ítem padre.
             *   `Media`: Valor `1`.
 3.  **Importación de colecciones (Secuencia de ejecución con `Bulk Import`)**:
-    *   **Paso 0: WP XML-ItemSets**
-    *   **Paso 1: WP XML-Items**
-    *   **Paso 2: WP XML-Media**
+    *   0.WP ML-ItemSets**
+    *   1.WP XML-Items**
+    *   2.WP XML-Media**
 
 - Realizar documentación paso a paso desde una instalación de Omeka básica del proceso de migración para facilitar trabajo a CAUCE.
 - Realizar el desarrollo del site donde se visualizarán los recursos digitales para facilitar su diseño posteriormente en producción.

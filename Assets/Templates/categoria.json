@@ -104,8 +104,8 @@
         "use_for_resources": [
             "item_sets"
         ],
-        "require_resource_class": "yes",
-        "closed_class_list": "yes",
+        "require_resource_class": "0",
+        "closed_class_list": "0",
         "closed_property_list": "yes",
         "quick_new_resource": "yes",
         "autocomplete": "no",
