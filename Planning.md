@@ -67,8 +67,7 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
 *   **Media:** En Omeka S, "Media" se refiere a los archivos digitales asociados a un Item (ej. el archivo JPG de una imagen, el archivo PDF de un documento). Un Item puede tener múltiples archivos Media.
 *   **Plantilla de Recurso (Resource Template):** Una estructura predefinida de campos de metadatos que se puede aplicar a Items, Item Sets u otros recursos en Omeka S. Ayuda a estandarizar la descripción de los recursos. (ej. `autor.json`, `categoria.json`).
 *   **Mapper:** En el contexto del módulo `Bulk Import` de Omeka S, un Mapper es un archivo XML (ej. `mapper_wp_post_omeka_items.xml`) que define cómo los datos de una fuente externa (procesados por un XSLT) se asignan a los campos de metadatos de un Item, Item Set o Media en Omeka S.
-*   **XSLT (o XSL):** Extensible Stylesheet Language Transformations. Un lenguaje para transformar documentos XML en otros formatos, incluyendo otros XML, HTML o texto plano. En esta migración, los archivos XSL (ej. `xsl_item_preprocessor.xsl`) se utilizan para preprocesar el XML de WordPress antes de que el Mapper lo utilice.
-*   **CAUCE:** Centro de Atención de Usuarios de Centros Educativos. El equipo responsable de ejecutar la migración en el entorno de producción y asegurar su calidad.
+
 
 ### Fase 1: Pre-Migración y Planificación (Referencia)
 
