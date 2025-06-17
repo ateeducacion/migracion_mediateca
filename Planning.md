@@ -2,7 +2,7 @@
 
 **Objetivo:** Migrar de forma segura los recursos digitales educativos y sus metadatos de la Mediateca de WordPress a Omeka S, estableciéndolos como ítems de omeka dentro de colecciones digitales (ItemSets).
 
-Este documento sirve como guía principal para el equipo de CAUCE (Centro de Atención de Usuarios de Centros Educativos) en la ejecución de la migración final al entorno de producción. Detalla los prerrequisitos, los pasos de migración, las verificaciones de calidad y las tareas post-lanzamiento. Las fases previas (1-3) describen el trabajo de desarrollo y pruebas ya realizado, y sirven de referencia técnica para los procedimientos aquí detallados.
+Este documento sirve como guía principal para el equipo de CAUCE en la ejecución de la migración final al entorno de producción. Detalla los prerrequisitos, los pasos de migración, las verificaciones de calidad y las tareas post-lanzamiento. Las fases previas (1-3) describen el trabajo de desarrollo y pruebas ya realizado, y sirven de referencia técnica para los procedimientos aquí detallados.
 
 **Fases de la migración**
     Para realizar la migración de los canales de la Mediateca se han planteado las siguientes fases, que se desarrollarán con más detalle posteriormente en este informe:
@@ -10,7 +10,7 @@ Este documento sirve como guía principal para el equipo de CAUCE (Centro de Ate
 *   Fase 2: Migración y Pruebas en el entorno de pruebas local (Iterativo) (Referencia)
 *   Fase 3: Migración total de la mediateca de ATE en Servidor de Desarrollo (Referencia)
 *   Fase 4: Migración Final en Producción (Ejecución por CAUCE)
-*   Fase 5: Post-Migración y Aseguramiento de la Calidad (Ejecución por CAUCE)
+*   Fase 5: Post-Migración y Aseguramiento de la Calidad (Valorar por CAUCE y acción coordinada)
 *   Fase 6: Puesta en Marcha y Post-Lanzamiento (Coordinado)
 
 
@@ -242,19 +242,22 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
 Esta fase es responsabilidad de CAUCE y consiste en replicar el proceso de migración realizado en el servidor de desarrollo (Fase 3) en el entorno de producción final. Se requiere una planificación cuidadosa y la ejecución de los pasos con supervisión.
 
 **A. Preparación del Entorno de Producción (Pre-Flight Checks):**
-    *   **A1. Compatibilidad de Omeka S:** Verificar que la versión de Omeka S instalada en el servidor de producción sea idéntica a la utilizada durante el desarrollo y pruebas (consultar Prerrequisitos y Fase 3).
-    *   **A2. Instalación y Configuración de Módulos Omeka S:** Instalar y activar todas las versiones de los módulos necesarios (ver lista en Prerrequisitos), asegurándose de que coincidan con las versiones probadas.
-    *   **A3. Requisitos del Servidor:** Confirmar que el entorno de producción cumple con todos los requisitos:
-        *   Versión de PHP y extensiones PHP necesarias.
-        *   Acceso y credenciales correctas a la base de datos.
-        *   Permisos adecuados en el servidor para la carga de archivos (directorio `files` de Omeka S) y para la ejecución de comandos del sistema si fuera necesario (ej. `sed`).
-    *   **A4. Acceso al XML de WordPress:** Asegurar la disponibilidad y acceso al fichero final y validado de exportación XML de WordPress (ver Prerrequisitos).
-    *   **A5. Copia de Seguridad Previa:** Realizar una copia de seguridad completa de la base de datos de la instancia de Omeka S en producción ANTES de iniciar cualquier proceso de importación.
-    *   **A6. Política de ImageMagick:** Verificar que la política de ImageMagick para el procesamiento de archivos EPS esté configurada. Si se usa `sed` (ver Fase 2, Punto 5):
-        ```bash
+
+* **A1. Compatibilidad de Omeka S:** Verificar que la versión de Omeka S instalada en el servidor de producción sea idéntica a la utilizada durante el desarrollo y pruebas (consultar Prerrequisitos y Fase 3).
+* **A2. Instalación y Configuración de Módulos Omeka S:** Instalar y activar todas las versiones de los módulos necesarios (ver lista en Prerrequisitos), asegurándose de que coincidan con las versiones probadas.
+* **A3. Requisitos del Servidor:** Confirmar que el entorno de producción cumple con todos los requisitos:
+  * Versión de PHP y extensiones PHP necesarias.
+  * Acceso y credenciales correctas a la base de datos.
+  * Permisos adecuados en el servidor para la carga de archivos (directorio `files` de Omeka S) y para la ejecución de comandos del sistema si fuera necesario (ej. `sed`).
+* **A4. Acceso al XML de WordPress:** Asegurar la disponibilidad y acceso al fichero final y validado de exportación XML de WordPress (ver Prerrequisitos).
+* **A5. Copia de Seguridad Previa:** Realizar una copia de seguridad completa de la base de datos de la instancia de Omeka S en producción ANTES de iniciar cualquier proceso de importación.
+* **A6. Política de ImageMagick:** Verificar que la política de ImageMagick para el procesamiento de archivos EPS esté configurada. Si se usa `sed` (ver Fase 2, Punto 5):
+
+    ```bash
         sed -i 's|<policy domain="coder" rights="none" pattern="EPS" />|<!-- <policy domain="coder" rights="none" pattern="EPS" /> -->|' /etc/ImageMagick-6/policy.xml
-        ```
-        Confirmar la ruta correcta de `policy.xml` en producción.
+
+    ```
+Confirmar la ruta correcta de `policy.xml` en producción.
 
 **B. Ejecución de la Migración en Producción:**
     *   Esta sección replica los pasos detallados en Fase 3, adaptados para producción.
@@ -281,7 +284,7 @@ Esta fase es responsabilidad de CAUCE y consiste en replicar el proceso de migra
 
 Una vez completados estos pasos, CAUCE procederá con las verificaciones exhaustivas detalladas en "Fase 5".
 
-### Fase 5: Post-Migración y Aseguramiento de la Calidad (Ejecución por CAUCE)
+### Fase 5: Post-Migración y Aseguramiento de la Calidad (Valorar por parte de CAUCE y hacer las comprobaciones de forma coordinada con ATE)
 
 **D. Auditoría Post-Migración Exhaustiva y Aseguramiento de Calidad:**
     Tras la verificación inmediata en producción, CAUCE realizará una auditoría más profunda.
@@ -293,8 +296,8 @@ Una vez completados estos pasos, CAUCE procederá con las verificaciones exhaust
         *   **Cómo:** Probar archivos multimedia para la muestra de D1.
         *   **Qué:** Enlaces rotos, renderizado (imágenes, PDF, video, EPS, VTT), visores, tipos MIME.
     *   **D3. Funcionalidad de Omeka S:**
-        *   **Búsqueda y Filtros (`Faceted Browse`):** Pruebas de palabras clave y facetas.
-        *   **Navegación:** Por Item Sets, etiquetas (`FieldsAsTags`), creador, jerarquía (`Hierarchy`).
+        *   **Búsqueda y Filtros** Pruebas de palabras clave y facetas.
+        *   **Navegación:** Por Item Sets, etiquetas, creador, jerarquía (`Hierarchy`).
         *   **Vistas Públicas y de Administración:** Correcta visualización.
         *   **Acceso y Permisos:** Pruebas de roles de usuario si aplica.
     *   **D4. Pruebas de Rendimiento (Básicas):**
@@ -304,23 +307,11 @@ Una vez completados estos pasos, CAUCE procederá con las verificaciones exhaust
         *   **Qué:** "Coordinar con el equipo responsable para la realización de Pruebas de Aceptación del Usuario (UAT) con un grupo designado de usuarios finales en el entorno de producción." (Responsabilidad principal del equipo de proyecto).
     *   **D6. Comprobación de Requisitos de Aspecto y Accesibilidad:**
         *   **Cómo:** Revisión manual contra guías de estilo y WCAG 2.1 AA.
-        *   **Qué:** Logo, colores, fuentes, navegación por teclado, alt text, contraste. Uso de herramientas (`WAVE`, `Axe`, `Lighthouse`).
+        *   **Qué:** Logo, colores, fuentes, navegación por teclado, alt text, contraste. Uso de herramientas.
 
 **E. Configuración de Redirecciones:**
     Es crucial redirigir las antiguas URLs de WordPress para preservar el SEO y la experiencia del usuario.
-    *   **E1. Planificación de Redirecciones:**
-        *   **Qué:** Identificar URLs antiguas de WordPress y mapearlas a las nuevas en Omeka S.
-        *   **Responsabilidad:** El equipo de planificación debería proveer mapeos o reglas. Si no, CAUCE definirá los mapeos.
-    *   **E2. Implementación de Redirecciones 301:**
-        *   **Cómo:** Implementar redirecciones permanentes (301) a nivel de servidor (`.htaccess` para Apache, configuración de Nginx).
-        *   **Pruebas:** Probar una muestra significativa de redirecciones.
-        *   **Ejemplo conceptual (`.htaccess` de Apache):**
-            ```htaccess
-            RewriteEngine On
-            RewriteRule ^antigua-ruta/post-ejemplo$ http://nuevo-sitio.omeka/item/123 [R=301,L]
-            RewriteRule ^category/nombre-categoria/(.*)$ http://nuevo-sitio.omeka/s/nombre-sitio/item-set?search=[nombre-item-set] [R=301,L]
-            ```
-        *   **Herramientas:** Verificadores de códigos de estado HTTP.
+    *   **E1. Implementación de Redirecciones 301:**
 
 **F. Limpieza Final y Mantenimiento Inicial:**
     Pasos finales para asegurar que el entorno de producción esté limpio y optimizado.
@@ -331,7 +322,6 @@ Una vez completados estos pasos, CAUCE procederá con las verificaciones exhaust
     *   **F3. Configuración de Copias de Seguridad (Producción):**
         *   **Qué:** Verificar y asegurar copias de seguridad automáticas y periódicas (BBDD y directorio `files`).
         *   **Definir:** Frecuencia, política de retención, almacenamiento seguro externo.
-
 ### Fase 6: Puesta en Marcha y Post-Lanzamiento (Coordinado)
 
 Esta fase se centra en el anuncio formal del nuevo sitio y el monitoreo continuo después del lanzamiento.
