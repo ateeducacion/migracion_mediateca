@@ -42,7 +42,7 @@ El plan de migración se estructura en seis fases:
 6. **Puesta en marcha y seguimiento post-lanzamiento**
 
 ## Plan de migración resumido
-Plan simplificado para su uso por parte del equipo técnico que realiza la migración
+Plan simplificado para su uso por parte del equipo técnico que realiza la migración. Disponible en `Planning resumido.md` 
 
 ## Glosario básico
 
