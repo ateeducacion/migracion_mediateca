@@ -4,7 +4,7 @@
 
 1.  **Pasos previos a la carga de archivos XML**
     *   **Añadir extensiones a la configuración de OMEKA-S**:
-        *   Para permitir la subida de nuevos tipos de archivo, navegue en la interfaz de administración de Omeka S a `Global Settings > Security` (o la ruta equivalente en su versión, como `Admin > Settings > Security`). En el campo "Allowed File Extensions" (Extensiones de archivo permitidas), añada las siguientes extensiones (separadas por comas si ya existen otras): `eps`, `vtt`, `zip`.
+        *   Para permitir la subida de nuevos tipos de archivo, navegue en la interfaz de administración de Omeka S a `Global Settings > Security`. En el campo "Allowed File Extensions" (Extensiones de archivo permitidas), añada las siguientes extensiones (separadas por comas): `eps`, `vtt`, `zip`.
         *   A continuación, vaya a `Admin > Vocabularies > MIME Types` (o `Admin > Settings > Media Types` o similar, dependiendo de la versión de Omeka S y los módulos activados). Asegúrese de que los siguientes tipos MIME estén presentes o añádalos:
             *   `application/postscript` (para .eps)
             *   `image/x-eps` (alternativo para .eps)
@@ -33,10 +33,14 @@
     *   Las siguientes configuraciones son para el módulo `Bulk Import`. Usar rutas `Mapping/` y `xsl/`.
     *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
         *   **Mapper**: `Mapping/mapper_wp_xml_itemsets.xml`
+        *   **Procesor**: Item Set
         *   **XSL Proc**: `xsl/xsl_omeka_itemset.xsl`
         *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
+        *   **Pestaña Processor**
+            ![Configuracion Processor item set](./img/Item_Sets.png)
     *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
         *   **Mapper**: `Mapping/mapper_wp_post_omeka_items.xml`
+        *   **Procesor**: Items
         *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
@@ -44,8 +48,11 @@
             postParent=0
             Media=0
             ```
+        *   **Pestaña Processor**
+            ![Configuracion Processor item](./img/Items.png)
     *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
         *   **Mapper**: `Mapping/mapper_wp_post_omeka_media.xml`
+        *   **Procesor**: Media
         *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
@@ -53,10 +60,12 @@
             postParent=0
             Media=1
             ```
+        *   **Pestaña Processor**
+            ![Configuracion Processor item](./img/Media.png)
 3.  **Importación de colecciones (Secuencia de ejecución con `Bulk Import`)**:
-    *   0.WP ML-ItemSets**
-    *   1.WP XML-Items**
-    *   2.WP XML-Media**
+    *   **0.WP ML-ItemSets**
+    *   **1.WP XML-Items**
+    *   **2.WP XML-Media**
 
 
 
