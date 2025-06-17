@@ -43,11 +43,9 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
     *   Advanced Resource Template - 3.4.39
     *   Bulk Export - 3.4.36
     *   Bulk Import - 3.4.58
-    *   CSV Import - 2.6.2
     *   Custom Vocab - 2.0.2
     *   Disk Quota - 1.0.1
     *   Easy Admin - 3.4.29
-    *   Faceted Browse - 1.7.0
     *   Hierarchy - 1.1.2
     *   IsolatedSites - 1.0.0
     *   ThreeDViewer - 1.0.4
@@ -320,10 +318,6 @@ Tras la verificación inmediata en producción, CAUCE realizará una auditoría 
 - **D5. Pruebas de Aceptación del Usuario (Coordinación):**
   - **Qué:** Coordinar con el equipo responsable para la realización de Pruebas de Aceptación del Usuario (UAT) con un grupo designado de usuarios finales en el entorno de producción. (Responsabilidad principal del equipo de proyecto).
 
-- **D6. Comprobación de Requisitos de Aspecto y Accesibilidad:**
-  - **Cómo:** Revisión manual contra guías de estilo y WCAG 2.1 AA.
-  - **Qué:** Logo, colores, fuentes, navegación por teclado, alt text, contraste.
-  - **Herramientas:** `WAVE`, `Axe`, `Lighthouse`.
 
 ---
 
