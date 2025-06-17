@@ -1,6 +1,7 @@
 ### Plan de migración de la Mediateca Wordpress a Omeka S
 
 ### Migración de mediateca de ATE a Servidor de Desarrollo (Referencia)
+Para realizar la migración se ha usado un playbook de ansite con un container docker. El playbook está dispible en el directorio omeka-s del repositorio https://github.com/ateeducacion/ansible_playbooks.git 
 
 1.  **Pasos previos a la carga de archivos XML**
     *   **Añadir extensiones a la configuración de OMEKA-S**:
