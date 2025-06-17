@@ -233,7 +233,6 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
     *   1.WP XML-Items**
     *   2.WP XML-Media**
 
-- Realizar documentación paso a paso desde una instalación de Omeka básica del proceso de migración para facilitar trabajo a CAUCE.
 - Realizar el desarrollo del site donde se visualizarán los recursos digitales para facilitar su diseño posteriormente en producción.
 
 
@@ -241,7 +240,7 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
 
 Esta fase es responsabilidad de CAUCE y consiste en replicar el proceso de migración realizado en el servidor de desarrollo (Fase 3) en el entorno de producción final. Se requiere una planificación cuidadosa y la ejecución de los pasos con supervisión.
 
-**A. Preparación del Entorno de Producción (Pre-Flight Checks):**
+**A. Preparación del Entorno de Producción:**
 
 * **A1. Compatibilidad de Omeka S:** Verificar que la versión de Omeka S instalada en el servidor de producción sea idéntica a la utilizada durante el desarrollo y pruebas (consultar Prerrequisitos y Fase 3).
 * **A2. Instalación y Configuración de Módulos Omeka S:** Instalar y activar todas las versiones de los módulos necesarios (ver lista en Prerrequisitos), asegurándose de que coincidan con las versiones probadas.
@@ -259,73 +258,105 @@ Esta fase es responsabilidad de CAUCE y consiste en replicar el proceso de migra
     ```
 Confirmar la ruta correcta de `policy.xml` en producción.
 
-**B. Ejecución de la Migración en Producción:**
-    *   Esta sección replica los pasos detallados en Fase 3, adaptados para producción.
-    *   **B1. Pasos previos a la carga de archivos XML (Producción):**
-        *   **Añadir extensiones y tipos MIME a OMEKA-S (Producción):** Seguir Fase 3 -> 1.
-        *   **Importación de plantillas de recursos (Producción):** Importar `Assets/Templates/autor.json` y `Assets/Templates/categoria.json` (ver Fase 3 -> 1).
-        *   **Realizar la migración de los autores `<wp:authors>` (Producción):** Crear CSV e importar (ver Fase 3 -> 1).
-    *   **B2. Configuración y Ejecución del Módulo `Bulk Import` (Producción):**
-        *   Utilizar los Mappers (`Mapping/`) y XSL (`xsl/`) definidos en Prerrequisitos.
-        *   Ejecutar los trabajos en orden (ver Fase 3 -> 3):
-            *   **0. WP XML-ItemSets (Producción)**
-            *   **1. WP XML- Items (Producción)**
-            *   **2. WP XML - Media (Producción)**
-        *   **Revisión de Logs:** Después de cada trabajo de `Bulk Import`, revisar logs.
-    *   **B3. Configuración de Sitios Omeka S (Producción):**
-        *   Navegar a `Admin > Sites`. Para cada sitio:
-            *   Seleccionar y configurar el tema visual (`Theme`).
-            *   Configurar páginas, Item Sets, navegación y módulos específicos del sitio (`Faceted Browse`, `Hierarchy`).
+---
 
-**C. Verificación Post-Migración Inmediata (Producción):**
-    *   **C1. Conteo de Elementos:** Confirmar totales de ítems, media, e ItemSets.
-    *   **C2. Control Aleatorio de Ítems:** Muestreo de ítems para verificar metadatos, media y relaciones.
-    *   **C3. Accesibilidad de Sitios:** Comprobar carga de URLs públicas y navegación básica.
+**B. Ejecución de la Migración en Producción**
 
-Una vez completados estos pasos, CAUCE procederá con las verificaciones exhaustivas detalladas en "Fase 5".
+Esta sección replica los pasos detallados en Fase 3, adaptados para producción.
+
+- **B1. Pasos previos a la carga de archivos XML (Producción):**
+  - **Añadir extensiones y tipos MIME a Omeka S (Producción):** Seguir Fase 3 → 1.
+  - **Importación de plantillas de recursos (Producción):** Importar `Assets/Templates/autor.json` y `Assets/Templates/categoria.json` (ver Fase 3 → 1).
+  - **Realizar la migración de los autores `<wp:authors>` (Producción):** Importar CSV de autores (ver Fase 3 → 1).
+
+- **B2. Configuración y Ejecución del Módulo `Bulk Import` (Producción):**
+  - Utilizar los Mappers (`Mapping/`) y XSL (`xsl/`) definidos en Prerrequisitos.
+  - Ejecutar los trabajos en orden (ver Fase 3 → 3):
+    - **0. WP XML-ItemSets (Producción)**
+    - **1. WP XML-Items (Producción)**
+    - **2. WP XML-Media (Producción)**
+  - **Revisión de Logs:** Después de cada trabajo de `Bulk Import`, revisar logs.
+
+- **B3. Configuración de Sitios Omeka S (Producción):**
+  - Navegar a `Admin > Sites`. Para cada sitio:
+    - Seleccionar y configurar el tema visual (`Theme`).
+    - Configurar páginas, Item Sets, navegación y módulos específicos del sitio (`Faceted Browse`, `Hierarchy`).
+
+---
+
+**C. Verificación Post-Migración Inmediata (Producción)**
+
+- **C1. Conteo de Elementos:** Confirmar totales de ítems, media e Item Sets.
+- **C2. Control Aleatorio de Ítems:** Muestreo de ítems para verificar metadatos, media y relaciones.
+- **C3. Accesibilidad de Sitios:** Comprobar carga de URLs públicas y navegación básica.
+
+---
 
 ### Fase 5: Post-Migración y Aseguramiento de la Calidad (Valorar por parte de CAUCE y hacer las comprobaciones de forma coordinada con ATE)
 
-**D. Auditoría Post-Migración Exhaustiva y Aseguramiento de Calidad:**
-    Tras la verificación inmediata en producción, CAUCE realizará una auditoría más profunda.
-    *   **D1. Precisión del Contenido y Metadatos:**
-        *   **Cómo:** Revisión de muestra representativa (ej. 10-20%).
-        *   **Qué:** Exactitud e integridad de metadatos, caracteres especiales, HTML, idiomas.
-        *   **Herramientas:** Checklists manuales, scripts de comparación si es posible.
-    *   **D2. Integridad de Archivos y Medios:**
-        *   **Cómo:** Probar archivos multimedia para la muestra de D1.
-        *   **Qué:** Enlaces rotos, renderizado (imágenes, PDF, video, EPS, VTT), visores, tipos MIME.
-    *   **D3. Funcionalidad de Omeka S:**
-        *   **Búsqueda y Filtros** Pruebas de palabras clave y facetas.
-        *   **Navegación:** Por Item Sets, etiquetas, creador, jerarquía (`Hierarchy`).
-        *   **Vistas Públicas y de Administración:** Correcta visualización.
-        *   **Acceso y Permisos:** Pruebas de roles de usuario si aplica.
-    *   **D4. Pruebas de Rendimiento (Básicas):**
-        *   **Cómo:** Navegación manual sistemática.
-        *   **Qué:** Tiempos de carga, lentitud notable, cuellos de botella.
-    *   **D5. Pruebas de Aceptación del Usuario (Coordinación):**
-        *   **Qué:** "Coordinar con el equipo responsable para la realización de Pruebas de Aceptación del Usuario (UAT) con un grupo designado de usuarios finales en el entorno de producción." (Responsabilidad principal del equipo de proyecto).
-    *   **D6. Comprobación de Requisitos de Aspecto y Accesibilidad:**
-        *   **Cómo:** Revisión manual contra guías de estilo y WCAG 2.1 AA.
-        *   **Qué:** Logo, colores, fuentes, navegación por teclado, alt text, contraste. Uso de herramientas.
+**D. Auditoría Post-Migración Exhaustiva y Aseguramiento de Calidad**
 
-**E. Configuración de Redirecciones:**
-    Es crucial redirigir las antiguas URLs de WordPress para preservar el SEO y la experiencia del usuario.
-    *   **E1. Implementación de Redirecciones 301:**
+Tras la verificación inmediata en producción, CAUCE realizará una auditoría más profunda.
 
-**F. Limpieza Final y Mantenimiento Inicial:**
-    Pasos finales para asegurar que el entorno de producción esté limpio y optimizado.
-    *   **F1. Eliminación de Archivos Temporales:**
-        *   **Qué:** Eliminar archivos de migración innecesarios (XML de prueba, logs revisados).
-    *   **F2. Optimización de Omeka S y Servidor:**
-        *   **Qué:** Revisar configuración de Omeka S (`Admin > Settings`, modo debug desactivado), considerar caché (Omeka S, servidor web, OPcache), asegurar funcionamiento de `jobs`.
-    *   **F3. Configuración de Copias de Seguridad (Producción):**
-        *   **Qué:** Verificar y asegurar copias de seguridad automáticas y periódicas (BBDD y directorio `files`).
-        *   **Definir:** Frecuencia, política de retención, almacenamiento seguro externo.
+- **D1. Precisión del Contenido y Metadatos:**
+  - **Cómo:** Revisión de muestra representativa (ej. 10–20%).
+  - **Qué:** Exactitud e integridad de metadatos, caracteres especiales, HTML, idiomas.
+  - **Herramientas:** Checklists manuales, scripts de comparación si es posible.
+
+- **D2. Integridad de Archivos y Medios:**
+  - **Cómo:** Probar archivos multimedia para la muestra de D1.
+  - **Qué:** Enlaces rotos, renderizado (imágenes, PDF, video, EPS, VTT), visores, tipos MIME.
+
+- **D3. Funcionalidad de Omeka S:**
+  - **Búsqueda y Filtros:** Pruebas de palabras clave y facetas.
+  - **Navegación:** Por Item Sets, etiquetas, creador, jerarquía (`Hierarchy`).
+  - **Vistas Públicas y de Administración:** Correcta visualización.
+  - **Acceso y Permisos:** Pruebas de roles de usuario si aplica.
+
+- **D4. Pruebas de Rendimiento (Básicas):**
+  - **Cómo:** Navegación manual sistemática.
+  - **Qué:** Tiempos de carga, lentitud notable, cuellos de botella.
+
+- **D5. Pruebas de Aceptación del Usuario (Coordinación):**
+  - **Qué:** Coordinar con el equipo responsable para la realización de Pruebas de Aceptación del Usuario (UAT) con un grupo designado de usuarios finales en el entorno de producción. (Responsabilidad principal del equipo de proyecto).
+
+- **D6. Comprobación de Requisitos de Aspecto y Accesibilidad:**
+  - **Cómo:** Revisión manual contra guías de estilo y WCAG 2.1 AA.
+  - **Qué:** Logo, colores, fuentes, navegación por teclado, alt text, contraste.
+  - **Herramientas:** `WAVE`, `Axe`, `Lighthouse`.
+
+---
+
+**E. Configuración de Redirecciones**
+
+Es crucial redirigir las antiguas URLs de WordPress para preservar el SEO y la experiencia del usuario.
+
+- **E1. Implementación de Redirecciones 301:**
+  - A definir más adelante en coordinación con el equipo de planificación.
+
+---
+
+**F. Limpieza Final y Mantenimiento Inicial**
+
+Pasos finales para asegurar que el entorno de producción esté limpio y optimizado.
+
+- **F1. Eliminación de Archivos Temporales:**
+  - **Qué:** Eliminar archivos de migración innecesarios (XML de prueba, logs revisados).
+
+- **F2. Optimización de Omeka S y Servidor:**
+  - **Qué:** Revisar configuración de Omeka S (`Admin > Settings`, modo debug desactivado), considerar caché (Omeka S, servidor web, OPcache), asegurar funcionamiento de `jobs`.
+
+- **F3. Configuración de Copias de Seguridad (Producción):**
+  - **Qué:** Verificar y asegurar copias de seguridad automáticas y periódicas (BBDD y directorio `files`).
+  - **Definir:** Frecuencia, política de retención, almacenamiento seguro externo.
+
+---
+
 ### Fase 6: Puesta en Marcha y Post-Lanzamiento (Coordinado)
 
 Esta fase se centra en el anuncio formal del nuevo sitio y el monitoreo continuo después del lanzamiento.
-*   **Comunicación del Lanzamiento:** Coordinar con los responsables para anunciar la disponibilidad del nuevo sitio Omeka S.
-*   **Monitoreo Inicial:** Supervisar rendimiento del servidor y logs de errores (Omeka S, servidor web) de forma intensiva.
-*   **Soporte al Usuario:** Establecer un canal para reportes de problemas o consultas.
-*   **Revisión Post-Implementación:** Después de un período prudencial (ej. un mes), revisar el proceso, identificar lecciones aprendidas y documentar ajustes.
+
+- **Comunicación del Lanzamiento:** Coordinar con los responsables para anunciar la disponibilidad del nuevo sitio Omeka S.
+- **Monitoreo Inicial:** Supervisar rendimiento del servidor y logs de errores (Omeka S, servidor web) de forma intensiva.
+- **Soporte al Usuario:** Establecer un canal para reportes de problemas o consultas.
+- **Revisión Post-Implementación:** Después de un período prudencial (ej. un mes), revisar el proceso, identificar lecciones
