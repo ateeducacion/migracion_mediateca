@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+   <resource wrapper="1">
+      <wp:term xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:o="http://omeka.org/s/vocabs/o#" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:wp="http://wordpress.org/export/1.2/">
+         <term_id>420</term_id>
+         <term_taxonomy>media-category</term_taxonomy>
+         <term_slug>2-centimos-de-euro</term_slug>
+         <term_parent/>
+         <term_name>2 céntimos de Euro</term_name>
+      </wp:term>
+   </resource>
+   <resource wrapper="1">
+      <wp:term xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:o="http://omeka.org/s/vocabs/o#" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:wp="http://wordpress.org/export/1.2/">
+         <term_id>232</term_id>
+         <term_taxonomy>media-category</term_taxonomy>
+         <term_slug>economia-domestica</term_slug>
+         <term_parent>colecciones</term_parent>
+         <term_name>Economía doméstica</term_name>
+      </wp:term>
+   </resource>
+</resources>

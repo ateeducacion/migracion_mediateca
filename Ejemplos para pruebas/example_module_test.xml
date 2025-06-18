@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><resources xmlns:dcterms="http://purl.org/dc/terms/" xmlns:o="http://omeka.org/s/vocabs/o#">
+    <resource>
+        <dcterms:title>Title of the first record</dcterms:title>
+        <dcterms:subject>Subject 1</dcterms:subject>
+        <dcterms:subject>Subject 2</dcterms:subject>
+        <dcterms:description>The description for the first record</dcterms:description>
+        <dcterms:date>2011</dcterms:date>
+        <dcterms:type>dctype:Text</dcterms:type>
+    </resource>
+    <resource o:is_public="false">
+        <dcterms:title>Title of the second record</dcterms:title>
+        <dcterms:subject>Subject 2</dcterms:subject>
+        <dcterms:abstract>The abstract (Qualified Dublin Core)</dcterms:abstract>
+        <dcterms:type>dctype:StillImage</dcterms:type>
+        <o:media o:ingester="url" o:resource_class="dctype:StillImage">https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png</o:media>
+    </resource>
+    <resource o:resource_template="Base Resource" o:resource_class="dctype:StillImage">
+        <dcterms:title>Logo de Wikidata</dcterms:title>
+        <dcterms:subject>Subject 2</dcterms:subject>
+        <dcterms:subject>Subject 3</dcterms:subject>
+        <dcterms:description>A logo of Wikidata.</dcterms:description>
+        <dcterms:date>2013</dcterms:date>
+        <dcterms:type>dctype:StillImage</dcterms:type>
+        <!-- "tag" is currently unmanaged. -->
+        <tag>Europe</tag>
+        <tag>Switzerland</tag>
+        <o:media o:resource_class="dctype:StillImage">
+            <o:media o:ingester="url">https://www.wikidata.org/static/images/project-logos/wikidatawiki.png</o:media>
+            <dcterms:title>Logo of Wikidata</dcterms:title>
+            <dcterms:format>image/png</dcterms:format>
+        </o:media>
+        <o:media o:resource_template="Base Resource">
+            <o:media o:ingester="html">&lt;p&gt;This is &lt;strong&gt;&lt;em&gt;html&lt;/em&gt; content&lt;/strong&gt;.&lt;/p&gt;</o:media>
+            <dcterms:title>Test of html content</dcterms:title>
+            <dcterms:description o:type="html"><p>This description is <strong><em>html</em></strong>.</p></dcterms:description>
+            <dcterms:description o:type="html">&lt;p&gt;This description is &lt;strong&gt;&lt;em&gt;html&lt;/em&gt;, with cdata&lt;/strong&gt;.&lt;/p&gt;</dcterms:description>
+            <dcterms:format>text/html</dcterms:format>
+        </o:media>
+        <o:media o:is_public="false">
+            <o:media o:ingester="html"><p>This is a second <strong><em>html</em> content</strong> (private).</p></o:media>
+            <dcterms:title>Test of second html content</dcterms:title>
+            <dcterms:format>text/html</dcterms:format>
+        </o:media>
+    </resource>
+</resources>

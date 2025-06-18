@@ -31,18 +31,18 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
                 *   **Identificador**: Usar el campo mapeado a `dcterms:identifier` (`author_id` de WP).
                 *   **Acción**: Seleccionar "Append to existing items", "Replace in existing items" o "Update existing items".
 2.  **Configuración Módulo `Bulk Import`**:
-    *   Las siguientes configuraciones son para el módulo `Bulk Import`. Usar rutas `Mapping/` y `xsl/`.
+    *   Las siguientes configuraciones son para el módulo `Bulk Import`.
     *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
-        *   **Mapper**: `Mapping/mapper_wp_xml_itemsets.xml`
+        *   **Mapper**: `mapper_wp_xml_itemsets.xml`
         *   **Procesor**: Item Set
-        *   **XSL Proc**: `xsl/xsl_omeka_itemset.xsl`
+        *   **XSL Proc**: `xsl_omeka_itemset.xsl`
         *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
         *   **Pestaña Processor**
             ![Configuracion Processor item set](./img/Item_Sets.png)
     *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
-        *   **Mapper**: `Mapping/mapper_wp_post_omeka_items.xml`
+        *   **Mapper**: `mapper_wp_post_omeka_items.xml`
         *   **Procesor**: Items
-        *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
+        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
             postType=attachement
@@ -52,9 +52,9 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
         *   **Pestaña Processor**
             ![Configuracion Processor item](./img/Items.png)
     *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
-        *   **Mapper**: `Mapping/mapper_wp_post_omeka_media.xml`
+        *   **Mapper**: `mapper_wp_post_omeka_media.xml`
         *   **Procesor**: Media
-        *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
+        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
             postType=attachement

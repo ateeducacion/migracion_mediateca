@@ -203,14 +203,14 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
                 *   **Identificador**: Usar el campo mapeado a `dcterms:identifier` (`author_id` de WP).
                 *   **Acción**: Seleccionar "Append to existing items", "Replace in existing items" o "Update existing items".
 2.  **Configuración Módulo `Bulk Import`**:
-    *   Las siguientes configuraciones son para el módulo `Bulk Import`. Usar rutas `Mapping/` y `xsl/`.
+    *   Las siguientes configuraciones son para el módulo `Bulk Import`.
     *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
-        *   **Mapper**: `Mapping/mapper_wp_xml_itemsets.xml`
-        *   **XSL Proc**: `xsl/xsl_omeka_itemset.xsl`
+        *   **Mapper**: `mapper_wp_xml_itemsets.xml`
+        *   **XSL Proc**: `xsl_omeka_itemset.xsl`
         *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
     *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
-        *   **Mapper**: `Mapping/mapper_wp_post_omeka_items.xml`
-        *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
+        *   **Mapper**: `mapper_wp_post_omeka_items.xml`
+        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
             postType=attachement
@@ -218,8 +218,8 @@ Antes de iniciar la Fase 4 (Migración Final en Producción), CAUCE debe verific
             Media=0
             ```
     *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
-        *   **Mapper**: `Mapping/mapper_wp_post_omeka_media.xml`
-        *   **XSL Proc**: `xsl/xsl_item_preprocessor.xsl`
+        *   **Mapper**: `mapper_wp_post_omeka_media.xml`
+        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
         *   **Params**:
             ```bash
             postType=attachement
