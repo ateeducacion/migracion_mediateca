@@ -12,9 +12,7 @@
     <!-- Root transformation -->
     <xsl:template match="/">
         <rss version="2.0">
-            <xsl:choose>
-                <xsl:apply-templates select="//item[wp:post_type = $postType]"/>
-            </xsl:choose>
+            <xsl:apply-templates select="//item[wp:post_type = $postType]"/>
         </rss>
     </xsl:template>
 
