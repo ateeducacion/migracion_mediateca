@@ -6,7 +6,7 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
 1.  **Pasos previos a la carga de archivos XML**
     *   **Añadir extensiones a la configuración de OMEKA-S**:
         *   Para permitir la subida de nuevos tipos de archivo, navegue en la interfaz de administración de Omeka S a `Global Settings > Security`. En el campo "Allowed File Extensions" (Extensiones de archivo permitidas), añada las siguientes extensiones (separadas por comas): `eps`, `vtt`, `zip`.
-        *   A continuación, vaya a `Admin > Vocabularies > MIME Types` (o `Admin > Settings > Media Types` o similar, dependiendo de la versión de Omeka S y los módulos activados). Asegúrese de que los siguientes tipos MIME estén presentes o añádalos:
+        *   A continuación, vaya a `Global Settings > Security`. Asegúrese de que los siguientes tipos MIME estén presentes o añádalos:
             *   `application/postscript` (para .eps)
             *   `image/x-eps` (alternativo para .eps)
             *   `text/vtt` (para .vtt)
