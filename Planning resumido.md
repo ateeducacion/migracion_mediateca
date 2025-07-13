@@ -17,52 +17,62 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
     ```
     *   **Importación de plantillas de recursos**:
         *   Estas plantillas definen la estructura de metadatos para tipos específicos de recursos en Omeka S. Se trata de archivos JSON que se importan a través de la interfaz de Omeka.
-        *   **Plantilla autores**: Navegue a `Admin > Templates`. Haga clic en el botón "Import" y seleccione el archivo `Assets/Templates/autor.json`. Confirme la importación. Esta plantilla se usará para los items que representan autores.
-        *   **Plantilla Categoría**: Repita el proceso anterior. Navegue a `Admin > Templates`. Haga clic en "Import" y seleccione el archivo `Assets/Templates/categoria.json`. Confirme la importación. Esta plantilla podría usarse para los ItemSets si se requiere una estructura específica más allá de los campos básicos.
+            *   **Plantilla autores**: En `Resources > Resource Templates`. Haga clic en el botón "Import" y seleccione el archivo `Assets/Templates/autor.json`. Confirme la importación. Esta plantilla se usará para los items que representan autores.
+            *   **Plantilla Categoría**: Repita el proceso anterior. Navegue a `Resources > Resource Templates`. Haga clic en "Import" y seleccione el archivo `Assets/Templates/categoria.json`. Confirme la importación. Esta plantilla podría usarse para los ItemSets si se requiere una estructura específica más allá de los campos básicos.
     *   **Realizar la migración de los autores `<wp:authors>`**:
         *   Usar el fichero **autores_csv.csv**
-        *   **Bulk import => Importación de items CSV (Módulo `CSV Import`)**: Utilizar el módulo `CSV Import` de Omeka S para importar los autores como items individuales.
-            *   **1ra pasada: Creación de recursos**:
-                *   **Plantilla de Recurso**: Utilizar la plantilla "autores" importada previamente.
-                *   **Mapeo**: Mapear las columnas del CSV a los campos correspondientes de la plantilla "autores" (e.g., `author_display_name` a `dcterms:title`, `author_id` a `dcterms:identifier`).
-                *   **Acción**: Seleccionar "Create new items".
-                *   **Identificador único**: Especificar la columna del CSV `author_id`.
-            *   **2da pasada: Append data to resources**:
-                *   **Identificador**: Usar el campo mapeado a `dcterms:identifier` (`author_id` de WP).
-                *   **Acción**: Seleccionar "Append to existing items", "Replace in existing items" o "Update existing items".
+        *   **Bulk import => Importación de items de fichero CSV**: La importación de los autores se realiza en dos pasadas.
+            *   **1ra pasada: Creación de recursos**: Acceda a `Bulk Import > Import > CSV - Items`.
+                *   **Seleccionar archivo**: `autores_csv.csv`
+                *   **Mapper**: Mapear las columnas del CSV: La cabecera de las columnas del archivo csv ya relacionan los campos correspondientes a la plantilla cargada en el paso anterior. Dejar la columna `author_id` sin asignar.
+                *   **Pantalla Processor**: Comprobar las siguientes opciones:
+                    *   **`Action`**: Seleccionar "Create new items".
+                    *   **`Identifier to use for linked resources or update`**: Dejar en blanco.
+            *   **2da pasada: Append data to resources**: Acceda a `Bulk Import > Import > CSV - Items`.
+                *   **Seleccionar archivo**: `autores_csv.csv`
+                *   **Mapper**: Mapear las columnas del CSV: La cabecera de las columnas del archivo csv ya relacionan los campos correspondientes a la plantilla cargada en el paso anterior. Dejar la columna `author_id` sin asignar.
+                *   **Pantalla Processor**: Comprobar las siguientes opciones:
+                    *   **`Action`**: Seleccionar `Append to existing items`.
+                    *   **`Identifier to use for linked resources or update`**: Usar el campo `dcterms:title` o `Dublin Core: Título`
+    *   **Descarga de fichero de exportación de mediateca de wordpress y preprocesado**
+        *   En el administrador de Wordpress del canal de mediateca a migrar. Vaya a `Herramientas > Exportar`, seleccionar `Todo el contenido` y `Descargar el archivo de exportación`
+        * El archivo exportado puede contener caracteres NULL. Hay que eliminarlos para evitar errores en la importación. Para ello ejecute:
+        ```bash
+        tr -d '\000' < archivo_descargado.xml > archivo_limpio.xml
+        ```
 2.  **Configuración Módulo `Bulk Import`**:
-    *   Las siguientes configuraciones son para el módulo `Bulk Import`.
-    *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
-        *   **Mapper**: `mapper_wp_xml_itemsets.xml`
-        *   **Procesor**: Item Set
-        *   **XSL Proc**: `xsl_omeka_itemset.xsl`
-        *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
-        *   **Pestaña Processor**
-            ![Configuracion Processor item set](./img/Item_Sets.png)
-    *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
-        *   **Mapper**: `mapper_wp_post_omeka_items.xml`
-        *   **Procesor**: Items
-        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
-        *   **Params**:
-            ```bash
-            postType=attachement
-            postParent=0
-            Media=0
-            ```
-        *   **Pestaña Processor**
-            ![Configuracion Processor item](./img/Items.png)
-    *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
-        *   **Mapper**: `mapper_wp_post_omeka_media.xml`
-        *   **Procesor**: Media
-        *   **XSL Proc**: `xsl_item_preprocessor.xsl`
-        *   **Params**:
-            ```bash
-            postType=attachement
-            postParent=0
-            Media=1
-            ```
-        *   **Pestaña Processor**
-            ![Configuracion Processor item](./img/Media.png)
+    *   Configurar importers en módulo Bulk Import. Vaya a `Modulos > Bulk Import > Configuration`.  Cree las siguientes configuraciones pulsando `Add new importer`:
+        *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
+            *   **Mapper**: `mapper_wp_xml_itemsets.xml`
+            *   **Procesor**: Item Set
+            *   **XSL Proc**: `xsl_omeka_itemset.xsl`
+            *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
+            *   **Pestaña Processor**
+                ![Configuracion Processor item set](./img/Item_Sets.png)
+        *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
+            *   **Mapper**: `mapper_wp_post_omeka_items.xml`
+            *   **Procesor**: Items
+            *   **XSL Proc**: `xsl_item_preprocessor.xsl`
+            *   **Params**:
+                ```bash
+                postType=attachement
+                postParent=0
+                Media=0
+                ```
+            *   **Pestaña Processor**
+                ![Configuracion Processor item](./img/Items.png)
+        *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
+            *   **Mapper**: `mapper_wp_post_omeka_media.xml`
+            *   **Procesor**: Media
+            *   **XSL Proc**: `xsl_item_preprocessor.xsl`
+            *   **Params**:
+                ```bash
+                postType=attachement
+                postParent=0
+                Media=1
+                ```
+            *   **Pestaña Processor**
+                ![Configuracion Processor item](./img/Media.png)
 3.  **Importación de colecciones (Secuencia de ejecución con `Bulk Import`)**:
     *   **0.WP ML-ItemSets**
     *   **1.WP XML-Items**
