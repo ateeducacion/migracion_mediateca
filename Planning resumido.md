@@ -1,7 +1,7 @@
 ### Plan de migración de la Mediateca Wordpress a Omeka S
 
 ### Migración de mediateca de ATE a Servidor de Desarrollo (Referencia)
-Para realizar la migración se ha usado un playbook de ansite con un container docker. El playbook está dispible en el directorio omeka-s del repositorio https://github.com/ateeducacion/ansible_playbooks.git 
+Para realizar la migración se ha usado un playbook de ansite con un container docker. El playbook está disponible en el directorio omeka-s del repositorio https://github.com/ateeducacion/ansible_playbooks.git 
 
 1.  **Pasos previos a la carga de archivos XML**
     *   **Añadir extensiones a la configuración de OMEKA-S**:
@@ -43,37 +43,50 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
 2.  **Configuración Módulo `Bulk Import`**:
     *   Configurar importers en módulo Bulk Import. Vaya a `Modulos > Bulk Import > Configuration`.  Cree las siguientes configuraciones pulsando `Add new importer`:
         *   **0. WP XML-ItemSets (Importación de Colecciones/Categorías)**
-            *   **Mapper**: `mapper_wp_xml_itemsets.xml`
-            *   **Procesor**: Item Set
-            *   **XSL Proc**: `xsl_omeka_itemset.xsl`
-            *   **Params**: (Según se definan en la interfaz del módulo `Bulk Import` si el XSL los requiere).
+            *   **Pestaña Importer**:
+                *   **Etiqueta**: 0. XML - Itemset
+                *   **Reader**: XML
+                *   **Mapper**: `mapper_wp_xml_itemsets.xml`
+                *   **Procesor**: Item Set
+            *   **Pestaña Reader**
+                *   **XSL Proc**: `xsl_omeka_itemset.xsl`
+                *   **Params**: Sin parámetros
             *   **Pestaña Processor**
                 ![Configuracion Processor item set](./img/Item_Sets.png)
         *   **1. WP XML- Items (Importación de Entradas/Items Principales)**
-            *   **Mapper**: `mapper_wp_post_omeka_items.xml`
-            *   **Procesor**: Items
-            *   **XSL Proc**: `xsl_item_preprocessor.xsl`
-            *   **Params**:
-                ```bash
-                postType=attachement
-                postParent=0
-                Media=0
-                ```
+            *   **Pestaña Importer**:
+                *   **Etiqueta**: 1. XML - Items
+                *   **Reader**: XML
+                *   **Mapper**: `mapper_wp_post_omeka_items.xml`
+                *   **Procesor**: Items
+            *   **Pestaña Reader**
+                *   **XSL Proc**: `xsl_item_preprocessor.xsl`
+                *   **Params**:
+                    ```bash
+                    postType=attachment
+                    postParent=0
+                    Media=0
+                    ```
             *   **Pestaña Processor**
                 ![Configuracion Processor item](./img/Items.png)
         *   **2. WP XML - Media (Importación de Medios Adjuntos a los Items)**
-            *   **Mapper**: `mapper_wp_post_omeka_media.xml`
-            *   **Procesor**: Media
-            *   **XSL Proc**: `xsl_item_preprocessor.xsl`
-            *   **Params**:
-                ```bash
-                postType=attachement
-                postParent=0
-                Media=1
-                ```
+            *   **Pestaña Importer**:
+                *   **Etiqueta**: 2. XML - Media
+                *   **Reader**: XML
+                *   **Mapper**: `mapper_wp_post_omeka_media.xml`
+                *   **Procesor**: Media
+            *   **Pestaña Reader**
+                *   **XSL Proc**: `xsl_item_preprocessor.xsl`
+                *   **Params**:
+                    ```bash
+                    postType=attachment
+                    postParent=0
+                    Media=1
+                    ```
             *   **Pestaña Processor**
                 ![Configuracion Processor item](./img/Media.png)
-3.  **Importación de colecciones (Secuencia de ejecución con `Bulk Import`)**:
+3.  **Importación de contenidos de la mediateca (Secuencia de ejecución con `Bulk Import`)**:
+    Vaya a `Bulk Import > Import` y realice la siguiente secuencia de importación usando los importadores configurados en el paso anterior. El importador de medios puede llevar varias horas para procesarse. 
     *   **0.WP ML-ItemSets**
     *   **1.WP XML-Items**
     *   **2.WP XML-Media**
