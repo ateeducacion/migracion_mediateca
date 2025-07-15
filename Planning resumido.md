@@ -2,7 +2,6 @@
 
 ### Migración de mediateca de ATE a Servidor de Desarrollo (Referencia)
 Para realizar la migración se ha usado un playbook de ansite con un container docker. El playbook está disponible en el directorio omeka-s del repositorio https://github.com/ateeducacion/ansible_playbooks.git 
-
 1.  **Pasos previos a la carga de archivos XML**
     *   **Añadir extensiones a la configuración de OMEKA-S**:
         *   Para permitir la subida de nuevos tipos de archivo, navegue en la interfaz de administración de Omeka S a `Global Settings > Security`. En el campo "Allowed File Extensions" (Extensiones de archivo permitidas), añada las siguientes extensiones (separadas por comas): `eps`, `vtt`, `zip`.
@@ -11,29 +10,16 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
             *   `image/x-eps` (alternativo para .eps)
             *   `text/vtt` (para .vtt)
             *   `application/zip` o `application/x-zip-compressed` (para .zip)
-    *   Procesado de medios EPS: ejecutar en servidor:
+    *   **Modificación de archivo policy.xml de ImageMagik:**    
+        Permitir procesar medios EPS y no procesar archivos ZIP:
     ```bash
-    sed -i 's|<policy domain="coder" rights="none" pattern="EPS" />|<!-- <policy domain="coder" rights="none" pattern="EPS" /> -->|' /etc/ImageMagick-6/policy.xml
+    sed -i 's|<policy domain="coder" rights="none" pattern="EPS" />|<!-- <policy domain="coder" rights="none" pattern="EPS" /> -->|' /etc/ImageMagick-6/policy.xml;
+    sed -i '/<\/policymap>/ i \  <policy domain="coder" rights="none" pattern="ZIP" />' /etc/ImageMagick-6/policy.xml
     ```
     *   **Importación de plantillas de recursos**:
         *   Estas plantillas definen la estructura de metadatos para tipos específicos de recursos en Omeka S. Se trata de archivos JSON que se importan a través de la interfaz de Omeka.
             *   **Plantilla autores**: En `Resources > Resource Templates`. Haga clic en el botón "Import" y seleccione el archivo `Assets/Templates/autor.json`. Confirme la importación. Esta plantilla se usará para los items que representan autores.
             *   **Plantilla Categoría**: Repita el proceso anterior. Navegue a `Resources > Resource Templates`. Haga clic en "Import" y seleccione el archivo `Assets/Templates/categoria.json`. Confirme la importación. Esta plantilla podría usarse para los ItemSets si se requiere una estructura específica más allá de los campos básicos.
-    *   **Realizar la migración de los autores `<wp:authors>`**:
-        *   Usar el fichero **autores_csv.csv**
-        *   **Bulk import => Importación de items de fichero CSV**: La importación de los autores se realiza en dos pasadas.
-            *   **1ra pasada: Creación de recursos**: Acceda a `Bulk Import > Import > CSV - Items`.
-                *   **Seleccionar archivo**: `autores_csv.csv`
-                *   **Mapper**: Mapear las columnas del CSV: La cabecera de las columnas del archivo csv ya relacionan los campos correspondientes a la plantilla cargada en el paso anterior. Dejar la columna `author_id` sin asignar.
-                *   **Pantalla Processor**: Comprobar las siguientes opciones:
-                    *   **`Action`**: Seleccionar "Create new items".
-                    *   **`Identifier to use for linked resources or update`**: Dejar en blanco.
-            *   **2da pasada: Append data to resources**: Acceda a `Bulk Import > Import > CSV - Items`.
-                *   **Seleccionar archivo**: `autores_csv.csv`
-                *   **Mapper**: Mapear las columnas del CSV: La cabecera de las columnas del archivo csv ya relacionan los campos correspondientes a la plantilla cargada en el paso anterior. Dejar la columna `author_id` sin asignar.
-                *   **Pantalla Processor**: Comprobar las siguientes opciones:
-                    *   **`Action`**: Seleccionar `Append to existing items`.
-                    *   **`Identifier to use for linked resources or update`**: Usar el campo `dcterms:title` o `Dublin Core: Título`
     *   **Descarga de fichero de exportación de mediateca de wordpress y preprocesado**
         *   En el administrador de Wordpress del canal de mediateca a migrar. Vaya a `Herramientas > Exportar`, seleccionar `Todo el contenido` y `Descargar el archivo de exportación`
         * El archivo exportado puede contener caracteres NULL. Hay que eliminarlos para evitar errores en la importación. Para ello ejecute:
