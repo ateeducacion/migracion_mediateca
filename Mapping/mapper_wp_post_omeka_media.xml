@@ -34,13 +34,6 @@
     </map>
 
 
-    <!-- Autor original -->
-    <map>
-        <from xpath="/wp:item/dc:creator"/>
-        <to field="dcterms:creator"
-        datatype="resource:item"/>
-    </map>
-
 
     <!-- Descripción-->
     <map>
@@ -75,10 +68,10 @@
              datatype="uri"/>
     </map>
  
-    <!-- Autor real (metadato personalizado) -->
+    <!-- Autor  -->
     <map>
         <from xpath="/wp:item/wp:postmeta[wp:meta_key='meta_author']/wp:meta_value"/>
-        <to field="dcterms:contributor"
+        <to field="dcterms:creator"
              datatype="literal"/>
     </map>
 
@@ -88,5 +81,13 @@
         <to field="dcterms:rights"
              datatype="literal"/>
     </map>
+
+    <!-- Autor original 
+    <map>
+        <from xpath="/wp:item/dc:creator"/>
+        <to field="dcterms:creator"
+        datatype="resource:item"/>
+    </map>
+    -->
 
 </mapping>
