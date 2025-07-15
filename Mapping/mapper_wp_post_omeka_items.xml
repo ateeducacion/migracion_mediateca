@@ -31,14 +31,6 @@
         <to field="dcterms:identifier"/>
     </map>
 
-
-    <!-- Autor original -->
-    <map>
-        <from xpath="/wp:item/dc:creator"/>
-        <to field="dcterms:creator"
-            datatype="resource:item"/>
-    </map>
-
     <!-- contenido HTML -->
     <map>
         <from xpath="/wp:item/wp:postmeta[wp:meta_key='plain_text_content']/wp:meta_value"/>
@@ -71,10 +63,10 @@
              datatype="literal"/>
     </map>
 
-    <!-- Autor (metadato personalizado) -->
+    <!-- Autor -->
     <map>
         <from xpath="/wp:item/wp:postmeta[wp:meta_key='meta_author']/wp:meta_value"/>
-        <to field="dcterms:contributor"
+        <to field="dcterms:creator"
              datatype="literal"/>
     </map>
 
@@ -106,5 +98,13 @@
         <to field="o:item_set"
              datatype="literal"/>
     </map>
+
+    <!-- Autor 
+    <map>
+        <from xpath="/wp:item/dc:creator"/>
+        <to field="dcterms:creator"
+            datatype="resource:item"/>
+    </map>
+    -->
 
 </mapping>
