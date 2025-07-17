@@ -18,6 +18,7 @@ Para realizar la migración se ha usado un playbook de ansite con un container d
     ```
     *   **Importación de plantillas de recursos**:
         *   Estas plantillas definen la estructura de metadatos para tipos específicos de recursos en Omeka S. Se trata de archivos JSON que se importan a través de la interfaz de Omeka.
+            *   **Requisito previo:** Antes de importar las plantillas siguientes asegúrese de que el módulo [`Advanced Resource Template`](https://omeka.org/s/modules/AdvancedResourceTemplate) está instalado y habilitado.
             *   **Plantilla autores**: En `Resources > Resource Templates`. Haga clic en el botón "Import" y seleccione el archivo `Assets/Templates/autor.json`. Confirme la importación. Esta plantilla se usará para los items que representan autores.
             *   **Plantilla Categoría**: Repita el proceso anterior. Navegue a `Resources > Resource Templates`. Haga clic en "Import" y seleccione el archivo `Assets/Templates/categoria.json`. Confirme la importación. Esta plantilla podría usarse para los ItemSets si se requiere una estructura específica más allá de los campos básicos.
     *   **Descarga de fichero de exportación de mediateca de wordpress y preprocesado**
