@@ -39,6 +39,11 @@
         <to field="dcterms:identifier"
              datatype="literal"/>
     </map>
+    <map>
+        <from xpath="/wp:item/site_id"/>
+        <to field="dcterms:subject"
+            datatype="literal"/>
+    </map>
 
     <!-- parent wp -->
     <map>

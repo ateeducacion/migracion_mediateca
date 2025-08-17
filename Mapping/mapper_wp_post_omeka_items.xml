@@ -13,10 +13,14 @@
         <from>Wordpress</from>
         <to>resources</to>
     </info>
-
     <map>
         <to field="resource_name"/>
         <mod raw="o:Item"/>
+    </map>
+    <!-- Site id -->
+    <map>
+        <from xpath="/wp:item/site_id"/>
+        <to field="o:site"/>
     </map>
 
     <!-- Título del ítem -->

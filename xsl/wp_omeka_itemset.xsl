@@ -7,6 +7,9 @@
     <!-- Output settings -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
+    <!-- Declare parameters with default values -->
+    <xsl:param name="SiteId" select="'0'" />
+
     <!-- Root template -->
     <xsl:template match="/">
         <resources>
@@ -37,6 +40,9 @@
                 <term_name>
                     <xsl:value-of select="wp:term_name"/>
                 </term_name>
+                <site_id>
+                    <xsl:value-of select="$SiteId"/>
+                </site_id> 
             </wp:term>
         </resource>
     </xsl:template>

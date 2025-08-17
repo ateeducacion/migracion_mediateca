@@ -8,6 +8,7 @@
     <xsl:param name="postType" select="'attachment'" />
     <xsl:param name="postParent" select="'0'" />
     <xsl:param name="Media" select="'0'" />
+    <xsl:param name="SiteId" select="'0'" />
 
     <!-- Root transformation -->
     <xsl:template match="/">
@@ -39,6 +40,9 @@
                         <title>
                             <xsl:value-of select="title"/>
                         </title>
+                        <site_id>
+                            <xsl:value-of select="$SiteId"/>
+                        </site_id> 
                         <link>
                             <xsl:value-of select="link"/>
                         </link>
