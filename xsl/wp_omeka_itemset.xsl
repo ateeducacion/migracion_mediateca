@@ -26,7 +26,7 @@
                 xmlns:wp="http://wordpress.org/export/1.2/"
                 xmlns:o="http://omeka.org/s/vocabs/o#" >
                 <term_id>
-                    <xsl:value-of select="wp:term_id"/>
+                    <xsl:value-of select="concat($SiteId, '-', wp:term_id)"/>
                 </term_id>
                 <term_taxonomy>
                     <xsl:value-of select="wp:term_taxonomy"/>

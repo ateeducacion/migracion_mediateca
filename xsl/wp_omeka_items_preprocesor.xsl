@@ -69,7 +69,7 @@
 
                         <!-- WordPress specific fields -->
                         <wp:post_id>
-                            <xsl:value-of select="wp:post_id"/>
+                            <xsl:value-of select="concat($SiteId, '-', wp:post_id)"/>
                         </wp:post_id>
                         <wp:post_date>
                             <xsl:value-of select="wp:post_date"/>
@@ -90,7 +90,7 @@
                             <xsl:value-of select="wp:status"/>
                         </wp:status>
                         <wp:post_parent>
-                            <xsl:value-of select="wp:post_parent"/>
+                            <xsl:value-of select="concat($SiteId, '-', wp:post_parent)"/>
                         </wp:post_parent>
                         <wp:menu_order>
                             <xsl:value-of select="wp:menu_order"/>
@@ -204,7 +204,7 @@
                         </description>
                         <!-- WordPress specific fields -->
                         <wp:post_id>
-                            <xsl:value-of select="wp:post_parent"/>
+                            <xsl:value-of select="concat($SiteId, '-', wp:post_parent)"/>
                         </wp:post_id>
                         <wp:post_date>
                             <xsl:value-of select="wp:post_date"/>
@@ -225,7 +225,7 @@
                             <xsl:value-of select="wp:status"/>
                         </wp:status>
                         <wp:post_parent>
-                            <xsl:value-of select="wp:post_parent"/>
+                            <xsl:value-of select="concat($SiteId, '-', wp:post_parent)"/>
                         </wp:post_parent>
                         <wp:menu_order>
                             <xsl:value-of select="wp:menu_order"/>
