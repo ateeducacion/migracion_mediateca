@@ -40,7 +40,7 @@
              datatype="literal"/>
     </map>
     <map>
-        <from xpath="/wp:item/site_id"/>
+        <from xpath="/wp:term/site_id"/>
         <to field="dcterms:subject"
             datatype="literal"/>
     </map>
