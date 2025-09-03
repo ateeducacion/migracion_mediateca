@@ -26,13 +26,14 @@
              datatype="literal"/>
     </map>
 
-    <!-- Identificador wp -->
+    <!-- Identificador wp 
     <map>
         <from xpath="/wp:term/term_id"/>
         <to field="dcterms:identifier"
              datatype="literal"/>
     </map>
-
+    -->
+    
     <!-- Slug wp -->
     <map>
         <from xpath="/wp:term/term_slug"/>
