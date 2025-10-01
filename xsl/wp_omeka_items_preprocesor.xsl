@@ -9,16 +9,31 @@
     <xsl:param name="postParent" select="'0'" />
     <xsl:param name="Media" select="'0'" />
     <xsl:param name="SiteId" select="'0'" />
+    <xsl:param name="min_post_date" select="''" />
 
     <!-- Root transformation -->
     <xsl:template match="/">
         <rss version="2.0">
             <xsl:choose>
                 <xsl:when test="$Media = '0'">
-                    <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent]"/>
+                    <xsl:choose>
+                        <xsl:when test="$min_post_date != ''">
+                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent and wp:post_date &gt;= $min_post_date]"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent]"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="//item[wp:post_type = $postType]"/>
+                    <xsl:choose>
+                        <xsl:when test="$min_post_date != ''">
+                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_date &gt;= $min_post_date]"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="//item[wp:post_type = $postType]"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
         </rss>
