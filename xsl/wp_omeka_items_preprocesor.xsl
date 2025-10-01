@@ -18,7 +18,7 @@
                 <xsl:when test="$Media = '0'">
                     <xsl:choose>
                         <xsl:when test="$min_post_date != ''">
-                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent and wp:post_date &gt;= $min_post_date]"/>
+                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent and translate(wp:post_date, ' :-', '') &gt;= translate($min_post_date, ' :-', '')]"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_parent = $postParent]"/>
@@ -28,7 +28,7 @@
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="$min_post_date != ''">
-                            <xsl:apply-templates select="//item[wp:post_type = $postType and wp:post_date &gt;= $min_post_date]"/>
+                            <xsl:apply-templates select="//item[wp:post_type = $postType and translate(wp:post_date, ' :-', '') &gt;= translate($min_post_date, ' :-', '')]"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="//item[wp:post_type = $postType]"/>
