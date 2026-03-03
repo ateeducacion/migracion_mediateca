@@ -32,7 +32,7 @@
                     <xsl:value-of select="wp:term_taxonomy"/>
                 </term_taxonomy>
                 <term_slug>
-                    <xsl:value-of select="wp:term_slug"/>
+                    <xsl:value-of select="concat(wp:term_slug, '-', $SiteId)"/>
                 </term_slug>
                 <term_parent>
                     <xsl:value-of select="wp:term_parent"/>
@@ -46,5 +46,6 @@
             </wp:term>
         </resource>
     </xsl:template>
+
 
 </xsl:stylesheet>
