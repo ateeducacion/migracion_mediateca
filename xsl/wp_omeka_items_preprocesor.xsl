@@ -122,7 +122,10 @@
                         <!-- Categories -->
                         <xsl:for-each select="category">
                             <category>
-                                <xsl:copy-of select="@*"/>
+                                <xsl:copy-of select="@domain"/>
+                                <xsl:attribute name="nicename">
+                                    <xsl:value-of select="concat(@nicename, '-', $SiteId)"/>
+                                </xsl:attribute>
                                 <xsl:value-of select="."/>
                             </category>
                         </xsl:for-each>
@@ -261,7 +264,10 @@
                         <!-- Categories -->
                         <xsl:for-each select="category">
                             <category>
-                                <xsl:copy-of select="@*"/>
+                                <xsl:copy-of select="@domain"/>
+                                <xsl:attribute name="nicename">
+                                    <xsl:value-of select="concat(@nicename, '-', $SiteId)"/>
+                                </xsl:attribute>
                                 <xsl:value-of select="."/>
                             </category>
                         </xsl:for-each>
@@ -284,3 +290,4 @@
     </xsl:template>
 
 </xsl:stylesheet>
+
